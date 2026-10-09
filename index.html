@@ -3,193 +3,345 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Robelyn S. Aquino | Personal Profile</title>
+  <title>Robelyn S. Aquino | Portfolio</title>
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
   <style>
-    /* Reset & Base Styles */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: 'Plus Jakarta Sans', sans-serif;
     }
+
     body {
-      background-color: #f4f6f8;
-      color: #333;
+      background-color: #080c14;
+      color: #e2e8f0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       padding: 40px 20px;
+      overflow-x: hidden;
     }
 
-    /* Page Entrance Animation */
-    .container {
-      max-width: 700px;
-      margin: 0 auto;
-      background: #ffffff;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-      overflow: hidden;
-      
-      /* Animation Applied */
-      animation: fadeInUp 0.8s ease-out forwards;
+    /* Ambient Blue Floating Glows */
+    .bg-spotlight-1 {
+      position: fixed;
+      top: -150px;
+      left: 10%;
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, rgba(37, 99, 235, 0.18) 0%, rgba(0,0,0,0) 70%);
+      pointer-events: none;
+      z-index: 0;
+      animation: floatGlow 8s ease-in-out infinite alternate;
     }
 
-    /* Header Banner */
-    .header {
-      background: linear-gradient(135deg, #2c3e50, #3498db);
-      color: white;
-      text-align: center;
-      padding: 40px 20px;
+    .bg-spotlight-2 {
+      position: fixed;
+      bottom: -150px;
+      right: 10%;
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, rgba(0,0,0,0) 70%);
+      pointer-events: none;
+      z-index: 0;
+      animation: floatGlow 10s ease-in-out infinite alternate-reverse;
     }
-    .header h1 {
-      font-size: 30px;
+
+    /* Bento Grid Layout */
+    .bento-grid {
+      position: relative;
+      z-index: 1;
+      max-width: 950px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    /* Base Card Glassmorphism */
+    .bento-card {
+      background: rgba(15, 23, 42, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 28px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      opacity: 0;
+      animation: cardAppear 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    /* Staggered Card Entrance Delays */
+    .hero-card      { animation-delay: 0.1s; grid-column: span 2; background: linear-gradient(135deg, rgba(30, 58, 138, 0.4), rgba(15, 23, 42, 0.8)); }
+    .status-card    { animation-delay: 0.2s; grid-column: span 1; }
+    .about-card     { animation-delay: 0.3s; grid-column: span 1; }
+    .skills-card    { animation-delay: 0.4s; grid-column: span 2; }
+    .projects-card  { animation-delay: 0.5s; grid-column: span 2; }
+    .links-card     { animation-delay: 0.6s; grid-column: span 1; }
+
+    /* Glass Neon Border & Lift on Hover */
+    .bento-card:hover {
+      border-color: rgba(59, 130, 246, 0.6);
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 20px 40px -15px rgba(37, 99, 235, 0.35);
+    }
+
+    /* Accent Pill Badges */
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #3b82f6;
+      margin-bottom: 12px;
+    }
+
+    .status-indicator {
+      display: inline-block;
+      width: 9px;
+      height: 9px;
+      background-color: #3b82f6;
+      border-radius: 50%;
+      box-shadow: 0 0 12px #3b82f6;
+      animation: pulseBlue 2s infinite;
+    }
+
+    h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #ffffff;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: #f8fafc;
       margin-bottom: 8px;
     }
-    .header p {
-      font-size: 16px;
-      opacity: 0.9;
-    }
 
-    /* Content Body */
-    .content {
-      padding: 30px;
-    }
-    .section {
-      margin-bottom: 25px;
-    }
-    .section-title {
-      font-size: 16px;
-      font-weight: 700;
-      color: #3498db;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+    .subtitle {
+      color: #60a5fa;
+      font-weight: 600;
+      font-size: 1.05rem;
       margin-bottom: 12px;
-      border-bottom: 2px solid #eef2f5;
-      padding-bottom: 5px;
-    }
-    .section p {
-      font-size: 15px;
-      line-height: 1.6;
-      color: #555;
     }
 
-    /* Skill Badges with Animated Pop-in */
-    .skills-grid {
+    p {
+      color: #94a3b8;
+      font-size: 0.94rem;
+      line-height: 1.6;
+    }
+
+    .project-list {
+      list-style: none;
+      margin-top: 10px;
+    }
+
+    .project-list li {
+      position: relative;
+      padding-left: 20px;
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      line-height: 1.5;
+    }
+
+    .project-list li::before {
+      content: "•";
+      color: #3b82f6;
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+      font-size: 1.2rem;
+    }
+
+    /* Skill Badges with Glow */
+    .skills-wrapper {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-top: 10px;
+      margin-top: 12px;
     }
-    .skill-badge {
-      background: #eef7fc;
-      color: #2980b9;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 14px;
+
+    .skill-pill {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #cbd5e1;
+      padding: 9px 16px;
+      border-radius: 12px;
+      font-size: 0.88rem;
       font-weight: 600;
-      opacity: 0;
-      animation: popIn 0.5s ease-out forwards;
-      transition: transform 0.2s ease, background 0.2s ease;
-    }
-    .skill-badge:hover {
-      transform: translateY(-3px) scale(1.05);
-      background: #d4ebf8;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
-    /* Staggered Delays for Skills */
-    .skill-badge:nth-child(1) { animation-delay: 0.3s; }
-    .skill-badge:nth-child(2) { animation-delay: 0.4s; }
-    .skill-badge:nth-child(3) { animation-delay: 0.5s; }
-    .skill-badge:nth-child(4) { animation-delay: 0.6s; }
-    .skill-badge:nth-child(5) { animation-delay: 0.7s; }
-    .skill-badge:nth-child(6) { animation-delay: 0.8s; }
-
-    /* Contact Button Animation */
-    .btn-container {
-      margin-top: 30px;
-      text-align: center;
+    .skill-pill:hover {
+      background: rgba(59, 130, 246, 0.25);
+      border-color: #3b82f6;
+      color: #ffffff;
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 0 8px 20px -4px rgba(59, 130, 246, 0.5);
     }
-    .btn {
-      display: inline-block;
+
+    /* Buttons Animation */
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       width: 100%;
-      padding: 14px;
-      background-color: #3498db;
-      color: white;
+      padding: 14px 18px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 14px;
+      color: #ffffff;
       text-decoration: none;
-      border-radius: 8px;
       font-weight: 600;
-      font-size: 16px;
+      font-size: 0.92rem;
+      margin-bottom: 12px;
       transition: all 0.3s ease;
     }
-    .btn:hover {
-      background-color: #2980b9;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+
+    .social-btn:last-child {
+      margin-bottom: 0;
     }
 
-    /* KEYFRAMES DEFINITIONS */
-    @keyframes fadeInUp {
+    .social-btn:hover {
+      background: #2563eb;
+      border-color: #2563eb;
+      transform: translateX(6px);
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
+    }
+
+    /* Animations */
+    @keyframes cardAppear {
       from {
         opacity: 0;
-        transform: translateY(30px);
+        transform: translateY(40px) scale(0.96);
       }
       to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
       }
     }
 
-    @keyframes popIn {
-      from {
-        opacity: 0;
-        transform: scale(0.8);
+    @keyframes floatGlow {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(45px, 35px); }
+    }
+
+    @keyframes pulseBlue {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
+      70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
+    }
+
+    @media (max-width: 768px) {
+      .bento-grid {
+        grid-template-columns: 1fr;
       }
-      to {
-        opacity: 1;
-        transform: scale(1);
+      .hero-card, .status-card, .about-card, .skills-card, .projects-card, .links-card {
+        grid-column: span 1;
       }
     }
   </style>
 </head>
 <body>
 
-  <div class="container">
-    <!-- Header -->
-    <div class="header">
-      <h1>Robelyn S. Aquino</h1>
-      <p>IT Student & Developer</p>
+  <div class="bg-spotlight-1"></div>
+  <div class="bg-spotlight-2"></div>
+
+  <div class="bento-grid">
+    
+    <!-- Hero Block -->
+    <div class="bento-card hero-card">
+      <div>
+        <span class="tag"><i class="fa-solid fa-code"></i> Developer Profile</span>
+        <h1>Robelyn S. Aquino</h1>
+        <div class="subtitle">IT Student & Student Leader</div>
+      </div>
+      <p>Information Technology student at <strong>Nueva Vizcaya State University (Bayombong Campus)</strong> with nearly 2 years of active student leadership experience. Focused on web development, modern UI/UX design, and student organization management.</p>
     </div>
 
-    <!-- Main Content -->
-    <div class="content">
-      <!-- Bio -->
-      <div class="section">
-        <div class="section-title">About Me</div>
-        <p>Hello! I am an Information Technology student passionate about web development, UI/UX design, and creating interactive software projects. I enjoy turning complex concepts into simple, usable web applications.</p>
+    <!-- Student Leadership Status -->
+    <div class="bento-card status-card">
+      <div>
+        <span class="tag"><span class="status-indicator"></span> Leadership</span>
+        <h2>FITS Treasurer</h2>
       </div>
+      <p>Active student leader for almost <strong>2 years</strong> in the <strong>Future Information Technologist Society</strong> (formerly Auditor, now Treasurer).</p>
+    </div>
 
-      <!-- Tech Stack -->
-      <div class="section">
-        <div class="section-title">Skills & Technologies</div>
-        <div class="skills-grid">
-          <span class="skill-badge">HTML5</span>
-          <span class="skill-badge">CSS3</span>
-          <span class="skill-badge">JavaScript</span>
-          <span class="skill-badge">Bootstrap</span>
-          <span class="skill-badge">SQL</span>
-          <span class="skill-badge">Java</span>
-        </div>
+    <!-- Education Block -->
+    <div class="bento-card about-card">
+      <div>
+        <span class="tag"><i class="fa-solid fa-graduation-cap"></i> Education</span>
+        <h2>BS in IT</h2>
       </div>
+      <p>Specializing in front-end development, Object-Oriented Programming (OOP), and interactive website layouts.</p>
+    </div>
 
-      <!-- Education -->
-      <div class="section">
-        <div class="section-title">Education</div>
-        <p><strong>Bachelor of Science in Information Technology</strong></p>
-        <p style="color: #888; font-size: 14px;">Nueva Vizcaya State University</p>
+    <!-- Tech Stack -->
+    <div class="bento-card skills-card">
+      <div>
+        <span class="tag"><i class="fa-solid fa-layer-group"></i> Tech Stack</span>
+        <h2>Skills & Tools</h2>
       </div>
-
-      <!-- Contact -->
-      <div class="btn-container">
-        <a href="mailto:your.email@example.com" class="btn">Get in Touch</a>
+      <div class="skills-wrapper">
+        <div class="skill-pill"><i class="fa-brands fa-html5" style="color: #e34f26;"></i> HTML5</div>
+        <div class="skill-pill"><i class="fa-brands fa-css3-alt" style="color: #1572b6;"></i> CSS3 / Animations</div>
+        <div class="skill-pill"><i class="fa-brands fa-bootstrap" style="color: #7952b3;"></i> Bootstrap</div>
+        <div class="skill-pill"><i class="fa-brands fa-java" style="color: #5382a1;"></i> Java</div>
+        <div class="skill-pill"><i class="fa-solid fa-mobile-screen" style="color: #38bdf8;"></i> App Inventor / Kodular</div>
       </div>
     </div>
+
+    <!-- Practical Projects Block -->
+    <div class="bento-card projects-card">
+      <div>
+        <span class="tag"><i class="fa-solid fa-folder-open"></i> Practical Experience</span>
+        <h2>Featured Projects & Work</h2>
+      </div>
+      <ul class="project-list">
+        <li><strong>Academic Credential Requesting System:</strong> Project scope and user requirements planning for online document requests.</li>
+        <li><strong>Mobile Application Logic:</strong> Built block-based mobile layouts including a BMI Calculator and Point-of-Sale (POS) ordering system.</li>
+        <li><strong>Personal Website & Portfolio Design:</strong> Developed customized web layouts featuring responsive sidebars, dark modes, and Bento grids.</li>
+      </ul>
+    </div>
+
+    <!-- Links / Connect -->
+    <div class="bento-card links-card">
+      <div>
+        <span class="tag"><i class="fa-solid fa-paper-plane"></i> Connect</span>
+      </div>
+      <div>
+        <a href="https://github.com/devrobelyn" target="_blank" class="social-btn">
+          <span><i class="fa-brands fa-github"></i> GitHub Profile</span>
+          <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
+        </a>
+        <a href="mailto:robelynaquino162@gmail.com" class="social-btn">
+          <span><i class="fa-solid fa-envelope"></i> Send Email</span>
+          <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
+        </a>
+      </div>
+    </div>
+
   </div>
 
 </body>
