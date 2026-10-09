@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Robelyn S. Aquino | Personal Profile</title>
+  <style>
+    /* Reset & Base Styles */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background-color: #f4f6f8;
+      color: #333;
+      padding: 40px 20px;
+    }
+
+    /* Page Entrance Animation */
+    .container {
+      max-width: 700px;
+      margin: 0 auto;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      overflow: hidden;
+      
+      /* Animation Applied */
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    /* Header Banner */
+    .header {
+      background: linear-gradient(135deg, #2c3e50, #3498db);
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+    }
+    .header h1 {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+    .header p {
+      font-size: 16px;
+      opacity: 0.9;
+    }
+
+    /* Content Body */
+    .content {
+      padding: 30px;
+    }
+    .section {
+      margin-bottom: 25px;
+    }
+    .section-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: #3498db;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+      border-bottom: 2px solid #eef2f5;
+      padding-bottom: 5px;
+    }
+    .section p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #555;
+    }
+
+    /* Skill Badges with Animated Pop-in */
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+    .skill-badge {
+      background: #eef7fc;
+      color: #2980b9;
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      font-weight: 600;
+      opacity: 0;
+      animation: popIn 0.5s ease-out forwards;
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+    .skill-badge:hover {
+      transform: translateY(-3px) scale(1.05);
+      background: #d4ebf8;
+    }
+
+    /* Staggered Delays for Skills */
+    .skill-badge:nth-child(1) { animation-delay: 0.3s; }
+    .skill-badge:nth-child(2) { animation-delay: 0.4s; }
+    .skill-badge:nth-child(3) { animation-delay: 0.5s; }
+    .skill-badge:nth-child(4) { animation-delay: 0.6s; }
+    .skill-badge:nth-child(5) { animation-delay: 0.7s; }
+    .skill-badge:nth-child(6) { animation-delay: 0.8s; }
+
+    /* Contact Button Animation */
+    .btn-container {
+      margin-top: 30px;
+      text-align: center;
+    }
+    .btn {
+      display: inline-block;
+      width: 100%;
+      padding: 14px;
+      background-color: #3498db;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.3s ease;
+    }
+    .btn:hover {
+      background-color: #2980b9;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+    }
+
+    /* KEYFRAMES DEFINITIONS */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <h1>Robelyn S. Aquino</h1>
+      <p>IT Student & Developer</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+      <!-- Bio -->
+      <div class="section">
+        <div class="section-title">About Me</div>
+        <p>Hello! I am an Information Technology student passionate about web development, UI/UX design, and creating interactive software projects. I enjoy turning complex concepts into simple, usable web applications.</p>
+      </div>
+
+      <!-- Tech Stack -->
+      <div class="section">
+        <div class="section-title">Skills & Technologies</div>
+        <div class="skills-grid">
+          <span class="skill-badge">HTML5</span>
+          <span class="skill-badge">CSS3</span>
+          <span class="skill-badge">JavaScript</span>
+          <span class="skill-badge">Bootstrap</span>
+          <span class="skill-badge">SQL</span>
+          <span class="skill-badge">Java</span>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="section">
+        <div class="section-title">Education</div>
+        <p><strong>Bachelor of Science in Information Technology</strong></p>
+        <p style="color: #888; font-size: 14px;">Nueva Vizcaya State University</p>
+      </div>
+
+      <!-- Contact -->
+      <div class="btn-container">
+        <a href="mailto:your.email@example.com" class="btn">Get in Touch</a>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
+
