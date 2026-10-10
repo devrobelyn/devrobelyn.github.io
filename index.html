@@ -1,350 +1,473 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="dark scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Robelyn S. Aquino | Portfolio</title>
-  
-  <!-- Font Awesome Icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <!-- Google Font -->
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-    }
-
-    body {
-      background-color: #080c14;
-      color: #e2e8f0;
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 40px 20px;
-      overflow-x: hidden;
-    }
-
-    /* Ambient Blue Floating Glows */
-    .bg-spotlight-1 {
-      position: fixed;
-      top: -150px;
-      left: 10%;
-      width: 550px;
-      height: 550px;
-      background: radial-gradient(circle, rgba(37, 99, 235, 0.18) 0%, rgba(0,0,0,0) 70%);
-      pointer-events: none;
-      z-index: 0;
-      animation: floatGlow 8s ease-in-out infinite alternate;
-    }
-
-    .bg-spotlight-2 {
-      position: fixed;
-      bottom: -150px;
-      right: 10%;
-      width: 550px;
-      height: 550px;
-      background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, rgba(0,0,0,0) 70%);
-      pointer-events: none;
-      z-index: 0;
-      animation: floatGlow 10s ease-in-out infinite alternate-reverse;
-    }
-
-    /* Bento Grid Layout */
-    .bento-grid {
-      position: relative;
-      z-index: 1;
-      max-width: 950px;
-      width: 100%;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-
-    /* Base Card Glassmorphism */
-    .bento-card {
-      background: rgba(15, 23, 42, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 24px;
-      padding: 28px;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      opacity: 0;
-      animation: cardAppear 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-    }
-
-    /* Staggered Card Entrance Delays */
-    .hero-card      { animation-delay: 0.1s; grid-column: span 2; background: linear-gradient(135deg, rgba(30, 58, 138, 0.4), rgba(15, 23, 42, 0.8)); }
-    .status-card    { animation-delay: 0.2s; grid-column: span 1; }
-    .about-card     { animation-delay: 0.3s; grid-column: span 1; }
-    .skills-card    { animation-delay: 0.4s; grid-column: span 2; }
-    .projects-card  { animation-delay: 0.5s; grid-column: span 2; }
-    .links-card     { animation-delay: 0.6s; grid-column: span 1; }
-
-    /* Glass Neon Border & Lift on Hover */
-    .bento-card:hover {
-      border-color: rgba(59, 130, 246, 0.6);
-      transform: translateY(-8px) scale(1.01);
-      box-shadow: 0 20px 40px -15px rgba(37, 99, 235, 0.35);
-    }
-
-    /* Accent Pill Badges */
-    .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      font-size: 0.72rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: #3b82f6;
-      margin-bottom: 12px;
-    }
-
-    .status-indicator {
-      display: inline-block;
-      width: 9px;
-      height: 9px;
-      background-color: #3b82f6;
-      border-radius: 50%;
-      box-shadow: 0 0 12px #3b82f6;
-      animation: pulseBlue 2s infinite;
-    }
-
-    h1 {
-      font-size: 2.2rem;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 6px;
-      letter-spacing: -0.5px;
-    }
-
-    h2 {
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: #f8fafc;
-      margin-bottom: 8px;
-    }
-
-    .subtitle {
-      color: #60a5fa;
-      font-weight: 600;
-      font-size: 1.05rem;
-      margin-bottom: 12px;
-    }
-
-    p {
-      color: #94a3b8;
-      font-size: 0.94rem;
-      line-height: 1.6;
-    }
-
-    .project-list {
-      list-style: none;
-      margin-top: 10px;
-    }
-
-    .project-list li {
-      position: relative;
-      padding-left: 20px;
-      color: #cbd5e1;
-      font-size: 0.9rem;
-      margin-bottom: 10px;
-      line-height: 1.5;
-    }
-
-    .project-list li::before {
-      content: "•";
-      color: #3b82f6;
-      font-weight: bold;
-      position: absolute;
-      left: 0;
-      font-size: 1.2rem;
-    }
-
-    /* Skill Badges with Glow */
-    .skills-wrapper {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 12px;
-    }
-
-    .skill-pill {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      color: #cbd5e1;
-      padding: 9px 16px;
-      border-radius: 12px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    .skill-pill:hover {
-      background: rgba(59, 130, 246, 0.25);
-      border-color: #3b82f6;
-      color: #ffffff;
-      transform: translateY(-4px) scale(1.05);
-      box-shadow: 0 8px 20px -4px rgba(59, 130, 246, 0.5);
-    }
-
-    /* Buttons Animation */
-    .social-btn {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      padding: 14px 18px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 14px;
-      color: #ffffff;
-      text-decoration: none;
-      font-weight: 600;
-      font-size: 0.92rem;
-      margin-bottom: 12px;
-      transition: all 0.3s ease;
-    }
-
-    .social-btn:last-child {
-      margin-bottom: 0;
-    }
-
-    .social-btn:hover {
-      background: #2563eb;
-      border-color: #2563eb;
-      transform: translateX(6px);
-      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.45);
-    }
-
-    /* Animations */
-    @keyframes cardAppear {
-      from {
-        opacity: 0;
-        transform: translateY(40px) scale(0.96);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-    }
-
-    @keyframes floatGlow {
-      0% { transform: translate(0, 0); }
-      100% { transform: translate(45px, 35px); }
-    }
-
-    @keyframes pulseBlue {
-      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7); }
-      70% { transform: scale(1.1); box-shadow: 0 0 0 10px rgba(59, 130, 246, 0); }
-      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(59, 130, 246, 0); }
-    }
-
-    @media (max-width: 768px) {
-      .bento-grid {
-        grid-template-columns: 1fr;
-      }
-      .hero-card, .status-card, .about-card, .skills-card, .projects-card, .links-card {
-        grid-column: span 1;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <div class="bg-spotlight-1"></div>
-  <div class="bg-spotlight-2"></div>
-
-  <div class="bento-grid">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robelyn S. Aquino - IT Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#0b0f19',
+                        cardBg: '#111827',
+                        cardBorder: '#1f2937',
+                        accentBlue: '#3b82f6',
+                        accentGlow: '#60a5fa',
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
-    <!-- Hero Block -->
-    <div class="bento-card hero-card">
-      <div>
-        <span class="tag"><i class="fa-solid fa-code"></i> Developer Profile</span>
-        <h1>Robelyn S. Aquino</h1>
-        <div class="subtitle">IT Student & Student Leader</div>
-      </div>
-      <p>Information Technology student at <strong>Nueva Vizcaya State University (Bayombong Campus)</strong> with nearly 2 years of active student leadership experience. Focused on web development, modern UI/UX design, and student organization management.</p>
-    </div>
+    <style>
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 5rem; /* Offsets scroll position for sticky header */
+        }
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #0b0f19;
+            color: #9ca3af;
+        }
+        .glass-card {
+            background-color: rgba(17, 24, 39, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(31, 41, 55, 0.8);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.25);
+            transform: translateY(-2px);
+        }
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: #3b82f6;
+            transition: width 0.3s ease;
+            box-shadow: 0 0 8px #3b82f6;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .glow-btn {
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+            transition: all 0.3s ease;
+        }
+        .glow-btn:hover {
+            box-shadow: 0 0 25px rgba(96, 165, 250, 0.7);
+            transform: translateY(-1px);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1f2937;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b82f6;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between selection:bg-accentBlue selection:text-white">
 
-    <!-- Student Leadership Status -->
-    <div class="bento-card status-card">
-      <div>
-        <span class="tag"><span class="status-indicator"></span> Leadership</span>
-        <h2>FITS Treasurer</h2>
-        <h2>Former FITS Auditor</h2>
-      </div>
-     
-    </div>
+    <header class="sticky top-0 z-50 backdrop-blur-md bg-[#0b0f19]/85 border-b border-[#1f2937]">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+            
+            <!-- Brand Logo Left -->
+            <a href="#" class="font-extrabold text-xl tracking-tight text-white flex items-center gap-2 group">
+                <span class="w-9 h-9 rounded-xl bg-blue-500/10 border border-blue-500/30 text-accentBlue flex items-center justify-center font-bold text-sm group-hover:border-accentBlue transition-colors shadow-lg shadow-blue-500/10">RA</span>
+                <span>Robelyn<span class="text-accentBlue">.dev</span></span>
+            </a>
 
-    <!-- Education Block -->
-    <div class="bento-card about-card">
-      <div>
-        <span class="tag"><i class="fa-solid fa-graduation-cap"></i> Education</span>
-        <h2>BS in IT</h2>
-      </div>
-      <p>Specializing in front-end development, Object-Oriented Programming (OOP), and interactive website layouts.</p>
-    </div>
+            <!-- Right-Aligned Navigation Links -->
+            <nav class="hidden lg:flex items-center gap-7 text-xs font-semibold uppercase tracking-wider text-slate-300">
+                <a href="#about" class="nav-link hover:text-white">About Me</a>
+                <a href="#tech-stack" class="nav-link hover:text-white">Tech Stack & Tools</a>
+                <a href="#education" class="nav-link hover:text-white">Academic Background</a>
+                <a href="#projects" class="nav-link hover:text-white">Featured Projects & Concepts</a>
+                <a href="#contact" class="nav-link text-accentBlue hover:text-accentGlow">Get In Touch</a>
+            </nav>
 
-    <!-- Tech Stack -->
-    <div class="bento-card skills-card">
-      <div>
-        <span class="tag"><i class="fa-solid fa-layer-group"></i> Tech Stack</span>
-        <h2>Skills & Tools</h2>
-      </div>
-      <div class="skills-wrapper">
-        <div class="skill-pill"><i class="fa-brands fa-html5" style="color: #e34f26;"></i> HTML5</div>
-        <div class="skill-pill"><i class="fa-brands fa-css3-alt" style="color: #1572b6;"></i> CSS3 / Animations</div>
-        <div class="skill-pill"><i class="fa-brands fa-bootstrap" style="color: #7952b3;"></i> Bootstrap</div>
-        <div class="skill-pill"><i class="fa-brands fa-java" style="color: #5382a1;"></i> Java</div>
-        <div class="skill-pill"><i class="fa-solid fa-mobile-screen" style="color: #38bdf8;"></i> App Inventor / Kodular</div>
-      </div>
-    </div>
+            <!-- Mobile Navigation Toggle -->
+            <button onclick="toggleMobileMenu()" class="lg:hidden text-slate-300 hover:text-accentBlue text-xl p-2 focus:outline-none">
+                <i class="fa-solid fa-bars-staggered" id="menuIcon"></i>
+            </button>
+        </div>
 
-    <!-- Practical Projects Block -->
-    <div class="bento-card projects-card">
-      <div>
-        <span class="tag"><i class="fa-solid fa-folder-open"></i> Practical Experience</span>
-        <h2>Featured Projects & Work</h2>
-      </div>
-      <ul class="project-list">
-        <li><strong>Academic Credential Requesting System:</strong> Project scope and user requirements planning for online document requests.</li>
-        <li><strong>Mobile Application Logic:</strong> Built block-based mobile layouts including a BMI Calculator and Point-of-Sale (POS) ordering system.</li>
-        <li><strong>Personal Website & Portfolio Design:</strong> Developed customized web layouts featuring responsive sidebars, dark modes, and Bento grids.</li>
-      </ul>
-    </div>
+        <!-- Mobile Menu Nav -->
+        <div id="mobileMenu" class="hidden lg:hidden bg-[#111827] border-b border-[#1f2937] px-6 py-4 flex-col gap-4 text-xs font-semibold uppercase tracking-wider text-slate-300">
+            <a href="#about" onclick="toggleMobileMenu()" class="py-2 hover:text-accentBlue border-b border-gray-800">About Me</a>
+            <a href="#tech-stack" onclick="toggleMobileMenu()" class="py-2 hover:text-accentBlue border-b border-gray-800">Tech Stack & Tools</a>
+            <a href="#education" onclick="toggleMobileMenu()" class="py-2 hover:text-accentBlue border-b border-gray-800">Academic Background</a>
+            <a href="#projects" onclick="toggleMobileMenu()" class="py-2 hover:text-accentBlue border-b border-gray-800">Featured Projects & Concepts</a>
+            <a href="#contact" onclick="toggleMobileMenu()" class="py-2 text-accentBlue">Get In Touch</a>
+        </div>
+    </header>
 
-    <!-- Links / Connect -->
-    <div class="bento-card links-card">
-      <div>
-        <span class="tag"><i class="fa-solid fa-paper-plane"></i> Connect</span>
-      </div>
-      <div>
-        <a href="https://github.com/devrobelyn" target="_blank" class="social-btn">
-          <span><i class="fa-brands fa-github"></i> GitHub Profile</span>
-          <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
-        </a>
-        <a href="mailto:robelynaquino162@gmail.com" class="social-btn">
-          <span><i class="fa-solid fa-envelope"></i> Send Email</span>
-          <i class="fa-solid fa-arrow-up-right-from-square" style="font-size: 0.75rem;"></i>
-        </a>
-      </div>
-    </div>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 my-10 w-full flex-grow">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
 
-  </div>
+            <div id="about" class="md:col-span-12 lg:col-span-8 glass-card rounded-3xl p-6 sm:p-10 flex flex-col sm:flex-row items-center sm:items-start gap-8 relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-72 h-72 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+                
+                <div class="relative shrink-0">
+                    <div class="w-32 h-32 sm:w-36 sm:h-36 rounded-2xl bg-[#111827] border-2 border-accentBlue/40 flex items-center justify-center text-accentBlue font-bold text-4xl shadow-2xl overflow-hidden relative">
+                        <span class="text-4xl font-extrabold tracking-tighter text-white">RA</span>
+                        <div class="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-transparent"></div>
+                    </div>
+                    <span class="absolute -bottom-2 -right-2 bg-emerald-500 text-slate-950 text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full border-2 border-[#111827] flex items-center gap-1 shadow-md">
+                        <span class="w-1.5 h-1.5 rounded-full bg-slate-950 animate-pulse"></span> Active
+                    </span>
+                </div>
 
+                <div class="flex flex-col items-center sm:items-start text-center sm:text-left flex-1">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-accentBlue border border-blue-500/20 mb-3">
+                        <i class="fa-solid fa-code"></i> IT Student & Web Developer
+                    </div>
+                    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-3">Robelyn S. Aquino</h1>
+                    <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-6">
+                        Information Technology student at <strong class="text-slate-200">Nueva Vizcaya State University</strong> specializing in front-end web development, responsive user interfaces, and mobile application logic. Driven by creating accessible and efficient digital platforms.
+                    </p>
+
+                    <div class="flex flex-wrap items-center justify-center sm:justify-start gap-3 w-full pt-4 border-t border-[#1f2937]">
+                        <a href="#contact" class="glow-btn bg-accentBlue hover:bg-accentGlow text-slate-950 font-extrabold text-xs px-5 py-2.5 rounded-xl transition-all flex items-center gap-2">
+                            <i class="fa-regular fa-envelope"></i> Contact Me
+                        </a>
+                        <a href="#projects" class="bg-[#1f2937] hover:bg-gray-800 text-slate-200 border border-gray-700 font-semibold text-xs px-5 py-2.5 rounded-xl transition-all flex items-center gap-2">
+                            <i class="fa-solid fa-briefcase"></i> View Projects
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="md:col-span-12 lg:col-span-4 glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-xs font-extrabold text-accentBlue uppercase tracking-wider flex items-center gap-2">
+                            <i class="fa-solid fa-user"></i> About Me
+                        </span>
+                        <span class="text-[10px] bg-[#1f2937] text-slate-300 px-2.5 py-1 rounded border border-gray-700">Overview</span>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-2">Developing Digital Solutions</h3>
+                    <p class="text-xs text-slate-400 leading-relaxed mb-4">
+                        I focus on building dynamic user experiences and structured application designs. My academic background centers around practical software design and clean layouts.
+                    </p>
+                </div>
+
+                <div class="pt-4 border-t border-[#1f2937] space-y-2 text-xs">
+                    <div class="flex justify-between items-center text-slate-400">
+                        <span>Institution:</span>
+                        <span class="text-slate-200 font-medium">NVSU</span>
+                    </div>
+                    <div class="flex justify-between items-center text-slate-400">
+                        <span>Location:</span>
+                        <span class="text-slate-200 font-medium">Nueva Vizcaya, PH</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tech-stack" class="md:col-span-12 lg:col-span-6 glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-lg font-bold flex items-center gap-2 text-white">
+                            <i class="fa-solid fa-layer-group text-accentBlue"></i> Tech Stack & Tools
+                        </h2>
+                        <span class="text-[11px] text-slate-400 bg-[#1f2937] px-3 py-1 rounded-full border border-gray-700">Skills</span>
+                    </div>
+                    <p class="text-slate-400 text-xs mb-6">Core technologies used for web development, user styling, and mobile app architecture:</p>
+
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                        <div class="flex items-center gap-2.5 bg-[#1f2937]/70 border border-gray-800 hover:border-accentBlue/50 p-3 rounded-xl text-xs font-semibold text-slate-200 transition-colors">
+                            <i class="fa-brands fa-html5 text-orange-500 text-lg"></i>
+                            <span>HTML5</span>
+                        </div>
+                        <div class="flex items-center gap-2.5 bg-[#1f2937]/70 border border-gray-800 hover:border-accentBlue/50 p-3 rounded-xl text-xs font-semibold text-slate-200 transition-colors">
+                            <i class="fa-brands fa-css3-alt text-blue-500 text-lg"></i>
+                            <span>CSS3</span>
+                        </div>
+                        <div class="flex items-center gap-2.5 bg-[#1f2937]/70 border border-gray-800 hover:border-accentBlue/50 p-3 rounded-xl text-xs font-semibold text-slate-200 transition-colors">
+                            <i class="fa-brands fa-bootstrap text-purple-400 text-lg"></i>
+                            <span>Bootstrap 5</span>
+                        </div>
+                        <div class="flex items-center gap-2.5 bg-[#1f2937]/70 border border-gray-800 hover:border-accentBlue/50 p-3 rounded-xl text-xs font-semibold text-slate-200 transition-colors">
+                            <i class="fa-brands fa-java text-red-400 text-lg"></i>
+                            <span>Java</span>
+                        </div>
+                        <div class="flex items-center gap-2.5 bg-[#1f2937]/70 border border-gray-800 hover:border-accentBlue/50 p-3 rounded-xl text-xs font-semibold text-slate-200 transition-colors">
+                            <i class="fa-solid fa-mobile-screen text-amber-400 text-lg"></i>
+                            <span>MIT App</span>
+                        </div>
+                        <div class="flex items-center gap-2.5 bg-[#1f2937]/70 border border-gray-800 hover:border-accentBlue/50 p-3 rounded-xl text-xs font-semibold text-slate-200 transition-colors">
+                            <i class="fa-brands fa-github text-slate-300 text-lg"></i>
+                            <span>GitHub Pages</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-[#1f2937] text-xs text-slate-400 flex items-center justify-between">
+                    <span>Primary Stack</span>
+                    <span class="text-slate-200 font-medium">Front-End & Mobile App Development</span>
+                </div>
+            </div>
+
+            <div id="education" class="md:col-span-12 lg:col-span-6 glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between mb-4">
+                        <h2 class="text-lg font-bold flex items-center gap-2 text-white">
+                            <i class="fa-solid fa-graduation-cap text-accentBlue"></i> Academic Background
+                        </h2>
+                        <span class="text-[11px] text-slate-400 bg-[#1f2937] px-3 py-1 rounded-full border border-gray-700">Education</span>
+                    </div>
+
+                    <div class="bg-[#1f2937]/50 border border-gray-800 rounded-2xl p-5 flex items-start gap-4">
+                        <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-accentBlue flex items-center justify-center shrink-0 text-xl border border-blue-500/20">
+                            <i class="fa-solid fa-university"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-sm font-bold text-white">Bachelor of Science in Information Technology</h3>
+                            <p class="text-xs text-accentBlue font-medium mt-1">Nueva Vizcaya State University (NVSU)</p>
+                            <p class="text-xs text-slate-400 mt-2 leading-relaxed">
+                                Undergoing coursework covering application design, web infrastructure, software development principles, and IT systems integration.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-6 pt-4 border-t border-[#1f2937] flex items-center justify-between text-xs text-slate-400">
+                    <span>Status</span>
+                    <span class="text-slate-200 font-medium">Undergraduate Student</span>
+                </div>
+            </div>
+
+            <div id="projects" class="md:col-span-12 glass-card rounded-3xl p-6 sm:p-8">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+                    <div>
+                        <h2 class="text-2xl font-bold flex items-center gap-2.5 text-white">
+                            <i class="fa-solid fa-folder-open text-accentBlue"></i> Featured Projects & Concepts
+                        </h2>
+                        <p class="text-slate-400 text-xs sm:text-sm mt-1">Academic software implementations, system models, and business concepts.</p>
+                    </div>
+
+                    <div class="flex gap-2 bg-[#1f2937] p-1.5 rounded-xl border border-gray-700 self-start sm:self-auto">
+                        <button onclick="filterProjects('all')" id="btn-all" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-accentBlue text-slate-950 transition-all">All</button>
+                        <button onclick="filterProjects('mobile')" id="btn-mobile" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all">Mobile</button>
+                        <button onclick="filterProjects('web')" id="btn-web" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all">Web & Business</button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    
+                    <!-- Project 1 -->
+                    <div class="project-item mobile bg-[#1f2937]/50 border border-gray-800 hover:border-accentBlue/50 rounded-2xl p-6 flex flex-col justify-between transition-all group">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold text-lg border border-amber-500/20 group-hover:scale-105 transition-transform">
+                                    <i class="fa-solid fa-cash-register"></i>
+                                </span>
+                                <span class="text-[10px] uppercase font-bold tracking-wider bg-amber-500/10 text-amber-400 px-2.5 py-1 rounded-md border border-amber-500/20">Mobile App</span>
+                            </div>
+                            <h3 class="text-base font-bold text-white mb-2 group-hover:text-accentBlue transition-colors">Fast Food Mobile POS System</h3>
+                            <p class="text-slate-400 text-xs leading-relaxed mb-4">
+                                Interactive mobile point-of-sale app designed for rapid menu selection, order summary calculations, and payment workflow management.
+                            </p>
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-800 text-xs">
+                            <span class="text-slate-400 font-medium">MIT App Inventor • Mobile UI</span>
+                            <span class="text-accentBlue font-medium flex items-center gap-1 group-hover:underline">
+                                Mobile Project <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Project 2 -->
+                    <div class="project-item mobile bg-[#1f2937]/50 border border-gray-800 hover:border-accentBlue/50 rounded-2xl p-6 flex flex-col justify-between transition-all group">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-lg border border-emerald-500/20 group-hover:scale-105 transition-transform">
+                                    <i class="fa-solid fa-calculator"></i>
+                                </span>
+                                <span class="text-[10px] uppercase font-bold tracking-wider bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-md border border-emerald-500/20">Mobile App</span>
+                            </div>
+                            <h3 class="text-base font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">BMI Calculator Application</h3>
+                            <p class="text-slate-400 text-xs leading-relaxed mb-4">
+                                Health application that calculates Body Mass Index based on user height and weight, providing real-time evaluation metrics and user health guidance.
+                            </p>
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-800 text-xs">
+                            <span class="text-slate-400 font-medium">MIT App Inventor • Calculations</span>
+                            <span class="text-emerald-400 font-medium flex items-center gap-1 group-hover:underline">
+                                Health App <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Project 3 -->
+                    <div class="project-item web bg-[#1f2937]/50 border border-gray-800 hover:border-accentBlue/50 rounded-2xl p-6 flex flex-col justify-between transition-all group">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center font-bold text-lg border border-purple-500/20 group-hover:scale-105 transition-transform">
+                                    <i class="fa-solid fa-file-signature"></i>
+                                </span>
+                                <span class="text-[10px] uppercase font-bold tracking-wider bg-purple-500/10 text-purple-400 px-2.5 py-1 rounded-md border border-purple-500/20">Web Proposal</span>
+                            </div>
+                            <h3 class="text-base font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">Academic Credential Requesting System</h3>
+                            <p class="text-slate-400 text-xs leading-relaxed mb-4">
+                                Web portal proposal enabling students to request academic transcripts and certifications online with online payment verification options.
+                            </p>
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-800 text-xs">
+                            <span class="text-slate-400 font-medium">Web Systems • Workflow</span>
+                            <span class="text-purple-400 font-medium flex items-center gap-1 group-hover:underline">
+                                Web Concept <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Project 4 -->
+                    <div class="project-item web bg-[#1f2937]/50 border border-gray-800 hover:border-accentBlue/50 rounded-2xl p-6 flex flex-col justify-between transition-all group">
+                        <div>
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="w-10 h-10 rounded-xl bg-amber-600/10 text-amber-500 flex items-center justify-center font-bold text-lg border border-amber-600/20 group-hover:scale-105 transition-transform">
+                                    <i class="fa-solid fa-mug-hot"></i>
+                                </span>
+                                <span class="text-[10px] uppercase font-bold tracking-wider bg-amber-600/10 text-amber-500 px-2.5 py-1 rounded-md border border-amber-600/20">Business Proposal</span>
+                            </div>
+                            <h3 class="text-base font-bold text-white mb-2 group-hover:text-amber-500 transition-colors">"Ani" Coffee & Milk Tea Enterprise</h3>
+                            <p class="text-slate-400 text-xs leading-relaxed mb-4">
+                                Business concept for a beverage brand directly sourcing raw agricultural tea and coffee ingredients from local Nueva Vizcaya farmers.
+                            </p>
+                        </div>
+                        <div class="flex items-center justify-between pt-4 border-t border-gray-800 text-xs">
+                            <span class="text-slate-400 font-medium">IT Enterprise • Business Plan</span>
+                            <span class="text-amber-500 font-medium flex items-center gap-1 group-hover:underline">
+                                Proposal <i class="fa-solid fa-arrow-right text-[10px]"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div id="contact" class="md:col-span-12 glass-card rounded-3xl p-6 sm:p-10">
+                <div class="max-w-2xl mx-auto">
+                    <div class="text-center mb-8">
+                        <span class="text-xs font-extrabold text-accentBlue uppercase tracking-wider">Contact</span>
+                        <h2 class="text-3xl font-extrabold text-white mt-1">Get In Touch</h2>
+                        <p class="text-slate-400 text-xs sm:text-sm mt-2">Have a project proposal, academic inquiry, or suggestion? Send a direct message below.</p>
+                    </div>
+
+                    <form id="portfolioContactForm" onsubmit="handleContactSubmit(event)" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1.5">Your Name</label>
+                                <input type="text" id="contactName" required placeholder="Robelyn Aquino" class="w-full bg-[#0b0f19] border border-gray-800 rounded-xl px-4 py-3 text-xs text-white placeholder:text-gray-600 focus:outline-none focus:border-accentBlue transition-colors">
+                            </div>
+                            <div>
+                                <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1.5">Email Address</label>
+                                <input type="email" id="contactEmail" required placeholder="name@example.com" class="w-full bg-[#0b0f19] border border-gray-800 rounded-xl px-4 py-3 text-xs text-white placeholder:text-gray-600 focus:outline-none focus:border-accentBlue transition-colors">
+                            </div>
+                        </div>
+
+                        <div>
+                            <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1.5">Message</label>
+                            <textarea id="contactMessage" rows="4" required placeholder="Type your message here..." class="w-full bg-[#0b0f19] border border-gray-800 rounded-xl px-4 py-3 text-xs text-white placeholder:text-gray-600 focus:outline-none focus:border-accentBlue transition-colors"></textarea>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
+                            <div class="flex items-center gap-3">
+                                <a href="https://devrobelyn.github.io" target="_blank" class="w-10 h-10 rounded-xl bg-[#0b0f19] border border-gray-800 text-slate-300 flex items-center justify-center hover:text-accentBlue hover:border-accentBlue transition-all">
+                                    <i class="fa-brands fa-github text-lg"></i>
+                                </a>
+                                <a href="mailto:robelyn@example.com" class="w-10 h-10 rounded-xl bg-[#0b0f19] border border-gray-800 text-slate-300 flex items-center justify-center hover:text-accentBlue hover:border-accentBlue transition-all">
+                                    <i class="fa-regular fa-envelope text-lg"></i>
+                                </a>
+                            </div>
+
+                            <button type="submit" class="glow-btn w-full sm:w-auto bg-accentBlue hover:bg-accentGlow text-slate-950 font-extrabold px-8 py-3 rounded-xl transition-all text-xs flex items-center justify-center gap-2">
+                                <i class="fa-solid fa-paper-plane"></i> Send Message
+                            </button>
+                        </div>
+
+                        <div id="contactStatus" class="hidden text-center text-xs font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 py-3 rounded-xl mt-4">
+                            Message received! Thank you for getting in touch.
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="border-t border-[#1f2937] py-6 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p>© Robelyn S. Aquino • Information Technology Student, NVSU</p>
+            <p class="text-slate-600">Built with HTML5, CSS3, Bootstrap 5 & Tailwind CSS</p>
+        </div>
+    </footer>
+
+    <script>
+        // Toggle Mobile Menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+            menu.classList.toggle('flex');
+        }
+
+        // Project filtering logic
+        function filterProjects(category) {
+            const items = document.querySelectorAll('.project-item');
+            const buttons = ['all', 'mobile', 'web'];
+
+            buttons.forEach(b => {
+                const btn = document.getElementById(`btn-${b}`);
+                if (b === category) {
+                    btn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-accentBlue text-slate-950 transition-all';
+                } else {
+                    btn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all';
+                }
+            });
+
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Contact form submission logic
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const status = document.getElementById('contactStatus');
+            status.classList.remove('hidden');
+            document.getElementById('portfolioContactForm').reset();
+            
+            setTimeout(() => {
+                status.classList.add('hidden');
+            }, 5000);
+        }
+    </script>
 </body>
 </html>
-
