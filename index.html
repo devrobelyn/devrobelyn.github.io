@@ -1,472 +1,1073 @@
 <!DOCTYPE html>
-<html lang="en" class="dark scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Robelyn S. Aquino - IT Portfolio</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    colors: {
-                        darkBg: '#0b0f19',
-                        cardBg: '#111827',
-                        cardBorder: '#1f2937',
-                        accentBlue: '#3b82f6',
-                        accentGlow: '#60a5fa',
-                    }
-                }
-            }
-        }
-    </script>
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>Robelyn Aquino | IT Portfolio</title>
+    
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 5rem; /* Offsets scroll position for sticky header */
+        :root {
+            --bg: #090d16;
+            --surface-1: #111827;
+            --surface-2: #1f2937;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(56, 189, 248, 0.4);
+            --accent-cyan: #38bdf8;
+            --accent-indigo: #818cf8;
+            --accent-emerald: #34d399;
+            --text-primary: #f9fafb;
+            --text-secondary: #9ca3af;
+            --glass-bg: rgba(17, 24, 39, 0.75);
         }
-        body {
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: #0b0f19;
-            color: #9ca3af;
         }
-        .glass-card {
-            background-color: rgba(17, 24, 39, 0.75);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(31, 41, 55, 0.8);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+        html { 
+            scroll-behavior: smooth; 
         }
-        .glass-card:hover {
-            border-color: rgba(59, 130, 246, 0.4);
-            box-shadow: 0 10px 30px -10px rgba(59, 130, 246, 0.25);
-            transform: translateY(-2px);
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding-bottom: 60px;
+            background-image: 
+                radial-gradient(ellipse at 20% 0%, rgba(56, 189, 248, 0.12) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 100%, rgba(129, 140, 248, 0.1) 0%, transparent 50%);
+            background-attachment: fixed;
+            overflow-x: hidden;
         }
-        .nav-link {
+
+        /* HEADER & NAVIGATION */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 8%;
+            background: rgba(9, 13, 22, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: #fff;
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 700;
+        }
+
+        .logo-box {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-indigo));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #000;
+            font-size: 0.9rem;
+            font-weight: 800;
+            box-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+        }
+
+        nav { 
+            display: flex; 
+            gap: 1.8rem; 
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            transition: all 0.2s ease;
+        }
+
+        nav a:hover { 
+            color: var(--accent-cyan); 
+        }
+
+        /* CONTAINER LAYOUT */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 110px 1.5rem 0;
+            display: flex;
+            flex-direction: column;
+            gap: 3.5rem;
+        }
+
+        section { 
+            scroll-margin-top: 100px; 
+        }
+
+        .section-title-wrap {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title-wrap i {
+            color: var(--accent-cyan);
+            font-size: 1.25rem;
+            background: rgba(56, 189, 248, 0.1);
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .section-title-wrap h2 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.9), rgba(31, 41, 55, 0.6));
+            border: 1px solid var(--border-hover);
+            border-radius: 24px;
+            padding: 3.5rem 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
             position: relative;
-            transition: color 0.3s ease;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
         }
-        .nav-link::after {
+
+        .hero-banner::after {
             content: '';
             position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: #3b82f6;
-            transition: width 0.3s ease;
-            box-shadow: 0 0 8px #3b82f6;
+            top: -50px;
+            right: -50px;
+            width: 250px;
+            height: 250px;
+            background: var(--accent-cyan);
+            filter: blur(120px);
+            opacity: 0.18;
+            pointer-events: none;
         }
-        .nav-link:hover::after {
-            width: 100%;
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            color: var(--accent-cyan);
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 20px;
+            width: fit-content;
+            margin-bottom: 1.2rem;
         }
-        .glow-btn {
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+
+        .pulse-dot {
+            width: 7px;
+            height: 7px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            box-shadow: 0 0 10px var(--accent-cyan);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.4; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 0.4; transform: scale(0.9); }
+        }
+
+        .hero-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title span {
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-indigo));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            margin-bottom: 2rem;
+            max-width: 680px;
+        }
+
+        .btn-group { 
+            display: flex; 
+            gap: 1rem; 
+            flex-wrap: wrap; 
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.25s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--accent-cyan);
+            color: #090d16;
+            box-shadow: 0 4px 20px rgba(56, 189, 248, 0.3);
+        }
+
+        .btn-primary:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 25px rgba(56, 189, 248, 0.5); 
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.05);
+            color: #fff;
+            border: 1px solid var(--border);
+        }
+
+        .btn-secondary:hover { 
+            background: rgba(255, 255, 255, 0.1); 
+            border-color: var(--accent-cyan);
+            transform: translateY(-2px); 
+        }
+
+        .about-card {
+            background: var(--surface-1);
+            border: 1px solid var(--border);
+            border-left: 4px solid var(--accent-cyan);
+            border-radius: 18px;
+            padding: 2.2rem;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .about-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 1rem;
+        }
+
+        .about-avatar {
+            width: 48px;
+            height: 48px;
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-cyan);
+            font-size: 1.25rem;
+        }
+
+        .about-header h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .about-card p {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .highlight {
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            border-top: 1px solid var(--border);
+            padding-top: 1.2rem;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: border-color 0.2s ease;
+        }
+
+        .stat-item:hover {
+            border-color: rgba(56, 189, 248, 0.3);
+        }
+
+        .stat-icon {
+            width: 38px;
+            height: 38px;
+            background: rgba(56, 189, 248, 0.1);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-cyan);
+            font-size: 1.1rem;
+        }
+
+        .stat-info .stat-label {
+            font-size: 0.72rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .stat-info .stat-value {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* TECH STACK GRID */
+        .stack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.2rem;
+        }
+
+        .stack-card {
+            background: var(--surface-1);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
             transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
         }
-        .glow-btn:hover {
-            box-shadow: 0 0 25px rgba(96, 165, 250, 0.7);
-            transform: translateY(-1px);
+
+        .stack-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            background: var(--surface-2);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
         }
-        ::-webkit-scrollbar {
-            width: 8px;
+
+        .stack-card-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
-        ::-webkit-scrollbar-track {
-            background: #0b0f19;
+
+        .stack-icon-box {
+            width: 44px;
+            height: 44px;
+            background: rgba(56, 189, 248, 0.1);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-cyan);
+            font-size: 1.4rem;
         }
-        ::-webkit-scrollbar-thumb {
-            background: #1f2937;
-            border-radius: 4px;
+
+        .stack-category {
+            font-size: 0.72rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--text-secondary);
         }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #3b82f6;
+
+        .stack-name {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .stack-card-bottom {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.78rem;
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        .dot-indicator {
+            width: 6px;
+            height: 6px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+        }
+
+        /* ACADEMIC BACKGROUND */
+        .edu-wrapper {
+            background: linear-gradient(135deg, rgba(17, 24, 39, 0.95), rgba(31, 41, 55, 0.7));
+            border: 1px solid rgba(129, 140, 248, 0.25);
+            border-radius: 20px;
+            padding: 2.2rem;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+        }
+
+        .edu-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-indigo));
+        }
+
+        .edu-main-layout {
+            display: flex;
+            gap: 1.8rem;
+            align-items: flex-start;
+        }
+
+        .edu-icon-badge {
+            width: 56px;
+            height: 56px;
+            background: rgba(129, 140, 248, 0.12);
+            border: 1px solid rgba(129, 140, 248, 0.3);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-indigo);
+            font-size: 1.6rem;
+            flex-shrink: 0;
+        }
+
+        .edu-details { 
+            flex-grow: 1; 
+        }
+
+        .edu-meta-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 0.6rem;
+            flex-wrap: wrap;
+        }
+
+        .edu-status-tag {
+            background: rgba(52, 211, 153, 0.1);
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            color: var(--accent-emerald);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .edu-status-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent-emerald);
+            border-radius: 50%;
+        }
+
+        .edu-degree-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 0.2rem;
+        }
+
+        .edu-institution {
+            color: var(--accent-cyan);
+            font-weight: 700;
+            font-size: 0.98rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .edu-text-content {
+            color: var(--text-secondary);
+            font-size: 0.98rem;
+            line-height: 1.7;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.2rem;
+        }
+
+        .project-card {
+            background: var(--surface-1);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 1.8rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: all 0.25s ease;
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .project-tag {
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--accent-cyan);
+            margin-bottom: 0.6rem;
+            display: block;
+        }
+
+        .project-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+        }
+
+        .project-card p {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 1rem;
+        }
+
+        .tech-tags { 
+            display: flex; 
+            gap: 6px; 
+            flex-wrap: wrap; 
+        }
+
+        .t-tag {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-secondary);
+            font-size: 0.72rem;
+            padding: 3px 9px;
+            border-radius: 6px;
+            font-weight: 600;
+        }
+
+        .action-link {
+            color: var(--accent-cyan);
+            font-size: 0.82rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* CONTACT SECTION */
+        .contact-card {
+            background: var(--surface-1);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 2.5rem;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 2.5rem;
+        }
+
+        .contact-left h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 700;
+            margin-bottom: 0.6rem;
+        }
+
+        .contact-left p {
+            color: var(--text-secondary);
+            font-size: 0.92rem;
+            margin-bottom: 2rem;
+        }
+
+        .c-item {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 1.2rem;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.92rem;
+            font-weight: 600;
+            transition: color 0.2s ease;
+        }
+
+        .c-item:hover { 
+            color: var(--accent-cyan); 
+        }
+
+        .c-item i {
+            width: 40px;
+            height: 40px;
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent-cyan);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+        }
+
+        .contact-right form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .form-group label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .contact-right input, .contact-right textarea {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: #fff;
+            outline: none;
+            font-size: 0.9rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .contact-right input:focus, .contact-right textarea:focus {
+            border-color: var(--accent-cyan);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 4rem;
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+        }
+
+        /* MODAL POPUP */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(9, 13, 22, 0.88);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 1.5rem;
+        }
+
+        .modal-card {
+            background: var(--surface-1);
+            border: 1px solid var(--accent-cyan);
+            border-radius: 20px;
+            padding: 2.2rem;
+            max-width: 520px;
+            width: 100%;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            color: var(--text-secondary);
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .modal-close:hover {
+            color: #fff;
+            border-color: var(--accent-cyan);
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 800px) {
+            .projects-grid, .contact-card {
+                grid-template-columns: 1fr;
+            }
+            header {
+                flex-direction: column;
+                gap: 0.8rem;
+                padding: 1rem 5%;
+            }
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            .edu-main-layout {
+                flex-direction: column;
+            }
         }
     </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-accentBlue selection:text-white">
+<body>
 
-    <header class="sticky top-0 z-50 backdrop-blur-md bg-[#0b0f19]/85 border-b border-[#1f2937]">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-            
-            <!-- Brand Logo Left -->
-            <a href="#" class="font-extrabold text-xl tracking-tight text-white flex items-center gap-2 group">
-                <span class="w-9 h-9 rounded-xl bg-blue-500/10 border border-blue-500/30 text-accentBlue flex items-center justify-center font-bold text-sm group-hover:border-accentBlue transition-colors shadow-lg shadow-blue-500/10">RA</span>
-                <span>Robelyn<span class="text-accentBlue">.dev</span></span>
-            </a>
-
-            <!-- Right-Aligned Navigation Links -->
-            <nav class="hidden lg:flex items-center gap-7 text-xs font-semibold uppercase tracking-wider text-slate-300">
-                <a href="#about" class="nav-link hover:text-white">About Me</a>
-                <a href="#tech-stack" class="nav-link hover:text-white">Tech Stack & Tools</a>
-                <a href="#education" class="nav-link hover:text-white">Academic Background</a>
-                <a href="#projects" class="nav-link hover:text-white">Featured Projects & Concepts</a>
-                <a href="#contact" class="nav-link text-accentBlue hover:text-accentGlow">Get In Touch</a>
-            </nav>
-
-            <!-- Mobile Navigation Toggle -->
-            <button onclick="toggleMobileMenu()" class="lg:hidden text-slate-300 hover:text-accentBlue text-xl p-2 focus:outline-none">
-                <i class="fa-solid fa-bars-staggered" id="menuIcon"></i>
-            </button>
-        </div>
-
-        <!-- Mobile Menu Nav -->
-        <div id="mobileMenu" class="hidden lg:hidden bg-[#111827] border-b border-[#1f2937] px-6 py-4 flex-col gap-4 text-xs font-semibold uppercase tracking-wider text-slate-300">
-            <a href="#about" onclick="toggleMobileMenu()" class="py-2 hover:text-accentBlue border-b border-gray-800">About Me</a>
-            <a href="#tech-stack" onclick="toggleMobileMenu()" class="py-2 hover:text-accentBlue border-b border-gray-800">Tech Stack & Tools</a>
-            <a href="#education" onclick="toggleMobileMenu()" class="py-2 hover:text-accentBlue border-b border-gray-800">Academic Background</a>
-            <a href="#projects" onclick="toggleMobileMenu()" class="py-2 hover:text-accentBlue border-b border-gray-800">Featured Projects & Concepts</a>
-            <a href="#contact" onclick="toggleMobileMenu()" class="py-2 text-accentBlue">Get In Touch</a>
-        </div>
+    <header>
+        <a href="#welcome" class="logo">
+            <div class="logo-box"><i class="fa-solid fa-code"></i></div>
+            <span>Robelyn.dev</span>
+        </a>
+        <nav>
+            <a href="#welcome">Home</a>
+            <a href="#about">About Me</a>
+            <a href="#tech-stack">Stack</a>
+            <a href="#education">Education</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </nav>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 my-10 w-full flex-grow">
-        <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+    <div class="container">
 
-            <div id="about" class="md:col-span-12 lg:col-span-8 glass-card rounded-3xl p-6 sm:p-10 flex flex-col sm:flex-row items-center sm:items-start gap-8 relative overflow-hidden">
-                <div class="absolute -top-10 -right-10 w-72 h-72 bg-blue-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        <section id="welcome">
+            <div class="hero-banner">
+                <div class="status-badge">
+                    <div class="pulse-dot"></div> BSIT Student & Developer
+                </div>
+                <h1 class="hero-title">Hello, I'm <span>Robelyn Aquino</span>.</h1>
+                <p class="hero-desc">
+                    Welcome to my portfolio! Exploring software development, mobile apps, and database systems with modern technology.
+                </p>
+                <div class="btn-group">
+                    <a href="#projects" class="btn btn-primary"><i class="fa-solid fa-folder"></i> View Projects</a>
+                    <a href="#contact" class="btn btn-secondary"><i class="fa-regular fa-envelope"></i> Contact Me</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="about">
+            <div class="section-title-wrap">
+                <i class="fa-solid fa-user"></i>
+                <h2>About Me</h2>
+            </div>
+            <div class="about-card">
+                <div class="about-header">
+                    <div class="about-avatar"><i class="fa-solid fa-code"></i></div>
+                    <h3>Profile Overview</h3>
+                </div>
+                <p>
+                    I am an IT student taking <span class="highlight">BSIT</span> at <span class="highlight">NVSU</span> who loves to explore new technology, program, and develop software. I am ready to learn something new and enhance my technical knowledge by means of academic and practical experience. My objective is to acquire more knowledge and experience to be ready for my future career in the technology industry.
+                </p>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-icon"><i class="fa-solid fa-laptop-code"></i></div>
+                        <div class="stat-info">
+                            <div class="stat-label">Major</div>
+                            <div class="stat-value">Web & Mobile Dev</div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+                        <div class="stat-info">
+                            <div class="stat-label">Degree Track</div>
+                            <div class="stat-value">BSIT Student</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="tech-stack">
+            <div class="section-title-wrap">
+                <i class="fa-solid fa-layer-group"></i>
+                <h2>Tech Stack & Tools</h2>
+            </div>
+            <div class="stack-grid">
                 
-                <div class="relative shrink-0">
-                    <div class="w-32 h-32 sm:w-36 sm:h-36 rounded-2xl bg-[#111827] border-2 border-accentBlue/40 flex items-center justify-center text-accentBlue font-bold text-4xl shadow-2xl overflow-hidden relative">
-                        <span class="text-4xl font-extrabold tracking-tighter text-white">RA</span>
-                        <div class="absolute inset-0 bg-gradient-to-tr from-blue-500/20 to-transparent"></div>
+                <div class="stack-card">
+                    <div class="stack-card-top">
+                        <div class="stack-icon-box"><i class="fa-brands fa-html5"></i></div>
+                        <span class="stack-category">Frontend</span>
                     </div>
-                    <span class="absolute -bottom-2 -right-2 bg-emerald-500 text-slate-950 text-[10px] font-extrabold uppercase tracking-wider px-2.5 py-0.5 rounded-full border-2 border-[#111827] flex items-center gap-1 shadow-md">
-                        <span class="w-1.5 h-1.5 rounded-full bg-slate-950 animate-pulse"></span> Active
-                    </span>
+                    <div class="stack-name">HTML5</div>
+                    <div class="stack-card-bottom">
+                        <div class="dot-indicator"></div> Core Web Structure
+                    </div>
                 </div>
 
-                <div class="flex flex-col items-center sm:items-start text-center sm:text-left flex-1">
-                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-accentBlue border border-blue-500/20 mb-3">
-                        <i class="fa-solid fa-code"></i> IT Student & Web Developer
+                <div class="stack-card">
+                    <div class="stack-card-top">
+                        <div class="stack-icon-box"><i class="fa-brands fa-css3-alt"></i></div>
+                        <span class="stack-category">Styling</span>
                     </div>
-                    <h1 class="text-3xl sm:text-4xl font-extrabold tracking-tight text-white mb-3">Robelyn S. Aquino</h1>
-                    <p class="text-slate-400 text-xs sm:text-sm leading-relaxed mb-6">
-                        Information Technology student at <strong class="text-slate-200">Nueva Vizcaya State University</strong> specializing in front-end web development, responsive user interfaces, and mobile application logic. Driven by creating accessible and efficient digital platforms.
-                    </p>
+                    <div class="stack-name">CSS3</div>
+                    <div class="stack-card-bottom">
+                        <div class="dot-indicator"></div> Custom UI Design
+                    </div>
+                </div>
 
-                    <div class="flex flex-wrap items-center justify-center sm:justify-start gap-3 w-full pt-4 border-t border-[#1f2937]">
-                        <a href="#contact" class="glow-btn bg-accentBlue hover:bg-accentGlow text-slate-950 font-extrabold text-xs px-5 py-2.5 rounded-xl transition-all flex items-center gap-2">
-                            <i class="fa-regular fa-envelope"></i> Contact Me
-                        </a>
-                        <a href="#projects" class="bg-[#1f2937] hover:bg-gray-800 text-slate-200 border border-gray-700 font-semibold text-xs px-5 py-2.5 rounded-xl transition-all flex items-center gap-2">
-                            <i class="fa-solid fa-briefcase"></i> View Projects
-                        </a>
+                <div class="stack-card">
+                    <div class="stack-card-top">
+                        <div class="stack-icon-box"><i class="fa-brands fa-bootstrap"></i></div>
+                        <span class="stack-category">Framework</span>
+                    </div>
+                    <div class="stack-name">Bootstrap 5</div>
+                    <div class="stack-card-bottom">
+                        <div class="dot-indicator"></div> Responsive Grids
+                    </div>
+                </div>
+
+                <div class="stack-card">
+                    <div class="stack-card-top">
+                        <div class="stack-icon-box"><i class="fa-solid fa-mobile-screen-button"></i></div>
+                        <span class="stack-category">Mobile Dev</span>
+                    </div>
+                    <div class="stack-name">MIT App Inventor</div>
+                    <div class="stack-card-bottom">
+                        <div class="dot-indicator"></div> Block Logic Apps
+                    </div>
+                </div>
+
+                <div class="stack-card">
+                    <div class="stack-card-top">
+                        <div class="stack-icon-box"><i class="fa-brands fa-github"></i></div>
+                        <span class="stack-category">Deployment</span>
+                    </div>
+                    <div class="stack-name">GitHub Pages</div>
+                    <div class="stack-card-bottom">
+                        <div class="dot-indicator"></div> Live Hosting
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="education">
+            <div class="section-title-wrap">
+                <i class="fa-solid fa-graduation-cap"></i>
+                <h2>Academic Background</h2>
+            </div>
+            <div class="edu-wrapper">
+                <div class="edu-main-layout">
+                    <div class="edu-icon-badge">
+                        <i class="fa-solid fa-university"></i>
+                    </div>
+                    <div class="edu-details">
+                        <div class="edu-meta-row">
+                            <span class="edu-status-tag">
+                                <span class="edu-status-dot"></span> Enrolled / In Progress
+                            </span>
+                        </div>
+                        <h3 class="edu-degree-title">BSIT (Bachelor of Science in Information Technology)</h3>
+                        <div class="edu-institution">
+                            <i class="fa-solid fa-location-dot"></i> NVSU (Nueva Vizcaya State University)
+                        </div>
+                        <p class="edu-text-content">
+                            Undergoing coursework covering web development, mobile application design, software engineering fundamentals, and modern IT infrastructure.
+                        </p>
                     </div>
                 </div>
             </div>
+        </section>
 
-            <div class="md:col-span-12 lg:col-span-4 glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
-                <div>
-                    <div class="flex items-center justify-between mb-4">
-                        <span class="text-xs font-extrabold text-accentBlue uppercase tracking-wider flex items-center gap-2">
-                            <i class="fa-solid fa-user"></i> About Me
-                        </span>
-                        <span class="text-[10px] bg-[#1f2937] text-slate-300 px-2.5 py-1 rounded border border-gray-700">Overview</span>
-                    </div>
-                    <h3 class="text-base font-bold text-white mb-2">Developing Digital Solutions</h3>
-                    <p class="text-xs text-slate-400 leading-relaxed mb-4">
-                        I focus on building dynamic user experiences and structured application designs. My academic background centers around practical software design and clean layouts.
-                    </p>
-                </div>
-
-                <div class="pt-4 border-t border-[#1f2937] space-y-2 text-xs">
-                    <div class="flex justify-between items-center text-slate-400">
-                        <span>Institution:</span>
-                        <span class="text-slate-200 font-medium">NVSU</span>
-                    </div>
-                    <div class="flex justify-between items-center text-slate-400">
-                        <span>Location:</span>
-                        <span class="text-slate-200 font-medium">Nueva Vizcaya, PH</span>
-                    </div>
-                </div>
+        <section id="projects">
+            <div class="section-title-wrap">
+                <i class="fa-solid fa-folder-tree"></i>
+                <h2>Featured Projects & Concepts</h2>
             </div>
-
-            <div id="tech-stack" class="md:col-span-12 lg:col-span-6 glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
-                <div>
-                    <div class="flex items-center justify-between mb-4">
-                        <h2 class="text-lg font-bold flex items-center gap-2 text-white">
-                            <i class="fa-solid fa-layer-group text-accentBlue"></i> Tech Stack & Tools
-                        </h2>
-                        <span class="text-[11px] text-slate-400 bg-[#1f2937] px-3 py-1 rounded-full border border-gray-700">Skills</span>
-                    </div>
-                    <p class="text-slate-400 text-xs mb-6">Core technologies used for web development, user styling, and mobile app architecture:</p>
-
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                        <div class="flex items-center gap-2.5 bg-[#1f2937]/70 border border-gray-800 hover:border-accentBlue/50 p-3 rounded-xl text-xs font-semibold text-slate-200 transition-colors">
-                            <i class="fa-brands fa-html5 text-orange-500 text-lg"></i>
-                            <span>HTML5</span>
-                        </div>
-                        <div class="flex items-center gap-2.5 bg-[#1f2937]/70 border border-gray-800 hover:border-accentBlue/50 p-3 rounded-xl text-xs font-semibold text-slate-200 transition-colors">
-                            <i class="fa-brands fa-css3-alt text-blue-500 text-lg"></i>
-                            <span>CSS3</span>
-                        </div>
-                        <div class="flex items-center gap-2.5 bg-[#1f2937]/70 border border-gray-800 hover:border-accentBlue/50 p-3 rounded-xl text-xs font-semibold text-slate-200 transition-colors">
-                            <i class="fa-brands fa-bootstrap text-purple-400 text-lg"></i>
-                            <span>Bootstrap 5</span>
-                        </div>
-                        <div class="flex items-center gap-2.5 bg-[#1f2937]/70 border border-gray-800 hover:border-accentBlue/50 p-3 rounded-xl text-xs font-semibold text-slate-200 transition-colors">
-                            <i class="fa-brands fa-java text-red-400 text-lg"></i>
-                            <span>Java</span>
-                        </div>
-                        <div class="flex items-center gap-2.5 bg-[#1f2937]/70 border border-gray-800 hover:border-accentBlue/50 p-3 rounded-xl text-xs font-semibold text-slate-200 transition-colors">
-                            <i class="fa-solid fa-mobile-screen text-amber-400 text-lg"></i>
-                            <span>MIT App</span>
-                        </div>
-                        <div class="flex items-center gap-2.5 bg-[#1f2937]/70 border border-gray-800 hover:border-accentBlue/50 p-3 rounded-xl text-xs font-semibold text-slate-200 transition-colors">
-                            <i class="fa-brands fa-github text-slate-300 text-lg"></i>
-                            <span>GitHub Pages</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-6 pt-4 border-t border-[#1f2937] text-xs text-slate-400 flex items-center justify-between">
-                    <span>Primary Stack</span>
-                    <span class="text-slate-200 font-medium">Front-End & Mobile App Development</span>
-                </div>
-            </div>
-
-            <div id="education" class="md:col-span-12 lg:col-span-6 glass-card rounded-3xl p-6 sm:p-8 flex flex-col justify-between">
-                <div>
-                    <div class="flex items-center justify-between mb-4">
-                        <h2 class="text-lg font-bold flex items-center gap-2 text-white">
-                            <i class="fa-solid fa-graduation-cap text-accentBlue"></i> Academic Background
-                        </h2>
-                        <span class="text-[11px] text-slate-400 bg-[#1f2937] px-3 py-1 rounded-full border border-gray-700">Education</span>
-                    </div>
-
-                    <div class="bg-[#1f2937]/50 border border-gray-800 rounded-2xl p-5 flex items-start gap-4">
-                        <div class="w-12 h-12 rounded-xl bg-blue-500/10 text-accentBlue flex items-center justify-center shrink-0 text-xl border border-blue-500/20">
-                            <i class="fa-solid fa-university"></i>
-                        </div>
-                        <div>
-                            <h3 class="text-sm font-bold text-white">Bachelor of Science in Information Technology</h3>
-                            <p class="text-xs text-accentBlue font-medium mt-1">Nueva Vizcaya State University (NVSU)</p>
-                            <p class="text-xs text-slate-400 mt-2 leading-relaxed">
-                                Undergoing coursework covering application design, web infrastructure, software development principles, and IT systems integration.
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="mt-6 pt-4 border-t border-[#1f2937] flex items-center justify-between text-xs text-slate-400">
-                    <span>Status</span>
-                    <span class="text-slate-200 font-medium">Undergraduate Student</span>
-                </div>
-            </div>
-
-            <div id="projects" class="md:col-span-12 glass-card rounded-3xl p-6 sm:p-8">
-                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
+            <div class="projects-grid">
+                
+                <!-- SLOT 1: POS -->
+                <div class="project-card" onclick="openModal('Fast-Food Mobile POS System', 'Single-screen Point-of-Sale mobile register built using MIT App Inventor featuring custom order block logic, receipt computation, and item management functions.')">
                     <div>
-                        <h2 class="text-2xl font-bold flex items-center gap-2.5 text-white">
-                            <i class="fa-solid fa-folder-open text-accentBlue"></i> Featured Projects & Concepts
-                        </h2>
-                        <p class="text-slate-400 text-xs sm:text-sm mt-1">Academic software implementations, system models, and business concepts.</p>
+                        <span class="project-tag">Mobile Application</span>
+                        <h3>Fast-Food Mobile POS System</h3>
+                        <p>Single-screen Point-of-Sale mobile register built using MIT App Inventor with order block logic and calculation functions.</p>
                     </div>
-
-                    <div class="flex gap-2 bg-[#1f2937] p-1.5 rounded-xl border border-gray-700 self-start sm:self-auto">
-                        <button onclick="filterProjects('all')" id="btn-all" class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-accentBlue text-slate-950 transition-all">All</button>
-                        <button onclick="filterProjects('mobile')" id="btn-mobile" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all">Mobile</button>
-                        <button onclick="filterProjects('web')" id="btn-web" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all">Web & Business</button>
+                    <div class="card-footer">
+                        <div class="tech-tags"><span class="t-tag">MIT App Inventor</span></div>
+                        <span class="action-link">Details <i class="fa-solid fa-arrow-right"></i></span>
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    
-                    <!-- Project 1 -->
-                    <div class="project-item mobile bg-[#1f2937]/50 border border-gray-800 hover:border-accentBlue/50 rounded-2xl p-6 flex flex-col justify-between transition-all group">
-                        <div>
-                            <div class="flex items-center justify-between mb-4">
-                                <span class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center font-bold text-lg border border-amber-500/20 group-hover:scale-105 transition-transform">
-                                    <i class="fa-solid fa-cash-register"></i>
-                                </span>
-                                <span class="text-[10px] uppercase font-bold tracking-wider bg-amber-500/10 text-amber-400 px-2.5 py-1 rounded-md border border-amber-500/20">Mobile App</span>
-                            </div>
-                            <h3 class="text-base font-bold text-white mb-2 group-hover:text-accentBlue transition-colors">Fast Food Mobile POS System</h3>
-                            <p class="text-slate-400 text-xs leading-relaxed mb-4">
-                                Interactive mobile point-of-sale app designed for rapid menu selection, order summary calculations, and payment workflow management.
-                            </p>
-                        </div>
-                        <div class="flex items-center justify-between pt-4 border-t border-gray-800 text-xs">
-                            <span class="text-slate-400 font-medium">MIT App Inventor • Mobile UI</span>
-                            <span class="text-accentBlue font-medium flex items-center gap-1 group-hover:underline">
-                                Mobile Project <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                            </span>
-                        </div>
+                <!-- SLOT 2: BMI -->
+                <div class="project-card" onclick="openModal('Mobile BMI Calculator', 'Health calculation utility application developed in MIT App Inventor calculating imperial Body Mass Index metrics with responsive UI components.')">
+                    <div>
+                        <span class="project-tag">Utility App</span>
+                        <h3>Mobile BMI Calculator</h3>
+                        <p>Mobile health calculation application developed in MIT App Inventor calculating imperial Body Mass Index metrics.</p>
                     </div>
-
-                    <!-- Project 2 -->
-                    <div class="project-item mobile bg-[#1f2937]/50 border border-gray-800 hover:border-accentBlue/50 rounded-2xl p-6 flex flex-col justify-between transition-all group">
-                        <div>
-                            <div class="flex items-center justify-between mb-4">
-                                <span class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center font-bold text-lg border border-emerald-500/20 group-hover:scale-105 transition-transform">
-                                    <i class="fa-solid fa-calculator"></i>
-                                </span>
-                                <span class="text-[10px] uppercase font-bold tracking-wider bg-emerald-500/10 text-emerald-400 px-2.5 py-1 rounded-md border border-emerald-500/20">Mobile App</span>
-                            </div>
-                            <h3 class="text-base font-bold text-white mb-2 group-hover:text-emerald-400 transition-colors">BMI Calculator Application</h3>
-                            <p class="text-slate-400 text-xs leading-relaxed mb-4">
-                                Health application that calculates Body Mass Index based on user height and weight, providing real-time evaluation metrics and user health guidance.
-                            </p>
-                        </div>
-                        <div class="flex items-center justify-between pt-4 border-t border-gray-800 text-xs">
-                            <span class="text-slate-400 font-medium">MIT App Inventor • Calculations</span>
-                            <span class="text-emerald-400 font-medium flex items-center gap-1 group-hover:underline">
-                                Health App <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                            </span>
-                        </div>
+                    <div class="card-footer">
+                        <div class="tech-tags"><span class="t-tag">App Inventor</span></div>
+                        <span class="action-link">Details <i class="fa-solid fa-arrow-right"></i></span>
                     </div>
-
-                    <!-- Project 3 -->
-                    <div class="project-item web bg-[#1f2937]/50 border border-gray-800 hover:border-accentBlue/50 rounded-2xl p-6 flex flex-col justify-between transition-all group">
-                        <div>
-                            <div class="flex items-center justify-between mb-4">
-                                <span class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center font-bold text-lg border border-purple-500/20 group-hover:scale-105 transition-transform">
-                                    <i class="fa-solid fa-file-signature"></i>
-                                </span>
-                                <span class="text-[10px] uppercase font-bold tracking-wider bg-purple-500/10 text-purple-400 px-2.5 py-1 rounded-md border border-purple-500/20">Web Proposal</span>
-                            </div>
-                            <h3 class="text-base font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">Academic Credential Requesting System</h3>
-                            <p class="text-slate-400 text-xs leading-relaxed mb-4">
-                                Web portal proposal enabling students to request academic transcripts and certifications online with online payment verification options.
-                            </p>
-                        </div>
-                        <div class="flex items-center justify-between pt-4 border-t border-gray-800 text-xs">
-                            <span class="text-slate-400 font-medium">Web Systems • Workflow</span>
-                            <span class="text-purple-400 font-medium flex items-center gap-1 group-hover:underline">
-                                Web Concept <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                            </span>
-                        </div>
-                    </div>
-
-                    <!-- Project 4 -->
-                    <div class="project-item web bg-[#1f2937]/50 border border-gray-800 hover:border-accentBlue/50 rounded-2xl p-6 flex flex-col justify-between transition-all group">
-                        <div>
-                            <div class="flex items-center justify-between mb-4">
-                                <span class="w-10 h-10 rounded-xl bg-amber-600/10 text-amber-500 flex items-center justify-center font-bold text-lg border border-amber-600/20 group-hover:scale-105 transition-transform">
-                                    <i class="fa-solid fa-mug-hot"></i>
-                                </span>
-                                <span class="text-[10px] uppercase font-bold tracking-wider bg-amber-600/10 text-amber-500 px-2.5 py-1 rounded-md border border-amber-600/20">Business Proposal</span>
-                            </div>
-                            <h3 class="text-base font-bold text-white mb-2 group-hover:text-amber-500 transition-colors">"Ani" Coffee & Milk Tea Enterprise</h3>
-                            <p class="text-slate-400 text-xs leading-relaxed mb-4">
-                                Business concept for a beverage brand directly sourcing raw agricultural tea and coffee ingredients from local Nueva Vizcaya farmers.
-                            </p>
-                        </div>
-                        <div class="flex items-center justify-between pt-4 border-t border-gray-800 text-xs">
-                            <span class="text-slate-400 font-medium">IT Enterprise • Business Plan</span>
-                            <span class="text-amber-500 font-medium flex items-center gap-1 group-hover:underline">
-                                Proposal <i class="fa-solid fa-arrow-right text-[10px]"></i>
-                            </span>
-                        </div>
-                    </div>
-
                 </div>
+
+                <!-- SLOT 3: Academic Credential System -->
+                <div class="project-card" onclick="openModal('Academic Credential Requesting System', 'Web-based document request proposal engineered for Quezon National High School to digitize Form 138 and certificate processing.')">
+                    <div>
+                        <span class="project-tag">System Proposal</span>
+                        <h3>Academic Credential Requesting System</h3>
+                        <p>Web-based document request proposal for Quezon National High School to digitize Form 138 and certificate processing.</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="tech-tags"><span class="t-tag">Web Concept</span></div>
+                        <span class="action-link">Details <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+                </div>
+
+                <!-- SLOT 4: Ani Coffee -->
+                <div class="project-card" onclick="openModal('Ani Coffee & Milk Tea Concept', 'Local business plan exercise introducing farmer-sourced coffee and tea products with operational workflows and financial planning.')">
+                    <div>
+                        <span class="project-tag">Business Concept</span>
+                        <h3>"Ani" Coffee & Milk Tea Concept</h3>
+                        <p>Local business plan exercise introducing farmer-sourced coffee and tea products with operational workflows.</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="tech-tags"><span class="t-tag">Business Plan</span></div>
+                        <span class="action-link">Details <i class="fa-solid fa-arrow-right"></i></span>
+                    </div>
+                </div>
+
             </div>
+        </section>
 
-            <div id="contact" class="md:col-span-12 glass-card rounded-3xl p-6 sm:p-10">
-                <div class="max-w-2xl mx-auto">
-                    <div class="text-center mb-8">
-                        <span class="text-xs font-extrabold text-accentBlue uppercase tracking-wider">Contact</span>
-                        <h2 class="text-3xl font-extrabold text-white mt-1">Get In Touch</h2>
-                        <p class="text-slate-400 text-xs sm:text-sm mt-2">Have a project proposal, academic inquiry, or suggestion? Send a direct message below.</p>
-                    </div>
-
-                    <form id="portfolioContactForm" onsubmit="handleContactSubmit(event)" class="space-y-4">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1.5">Your Name</label>
-                                <input type="text" id="contactName" required placeholder="Robelyn Aquino" class="w-full bg-[#0b0f19] border border-gray-800 rounded-xl px-4 py-3 text-xs text-white placeholder:text-gray-600 focus:outline-none focus:border-accentBlue transition-colors">
-                            </div>
-                            <div>
-                                <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1.5">Email Address</label>
-                                <input type="email" id="contactEmail" required placeholder="name@example.com" class="w-full bg-[#0b0f19] border border-gray-800 rounded-xl px-4 py-3 text-xs text-white placeholder:text-gray-600 focus:outline-none focus:border-accentBlue transition-colors">
-                            </div>
+        <section id="contact">
+            <div class="section-title-wrap">
+                <i class="fa-regular fa-paper-plane"></i>
+                <h2>Get In Touch</h2>
+            </div>
+            <div class="contact-card">
+                <div class="contact-left">
+                    <h3>Let's Connect!</h3>
+                    <p>Have a question or want to work together? Feel free to reach out directly.</p>
+                    <a href="mailto:robelynaquino162@gmail.com" class="c-item">
+                        <i class="fa-solid fa-envelope"></i> robelynaquino162@gmail.com
+                    </a>
+                    <a href="https://devrob.github.io" target="_blank" rel="noopener" class="c-item">
+                        <i class="fa-brands fa-github"></i> devrob.github.io
+                    </a>
+                </div>
+                <div class="contact-right">
+                    <form onsubmit="event.preventDefault(); showCustomToast(); this.reset();">
+                        <div class="form-group">
+                            <label for="contact-name">Your Name</label>
+                            <input type="text" id="contact-name" placeholder="Enter your name" required>
                         </div>
-
-                        <div>
-                            <label class="block text-[11px] font-bold text-slate-300 uppercase mb-1.5">Message</label>
-                            <textarea id="contactMessage" rows="4" required placeholder="Type your message here..." class="w-full bg-[#0b0f19] border border-gray-800 rounded-xl px-4 py-3 text-xs text-white placeholder:text-gray-600 focus:outline-none focus:border-accentBlue transition-colors"></textarea>
+                        <div class="form-group">
+                            <label for="contact-email">Your Email Address</label>
+                            <input type="email" id="contact-email" placeholder="Enter your email address" required>
                         </div>
-
-                        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
-                            <div class="flex items-center gap-3">
-                                <a href="https://devrobelyn.github.io" target="_blank" class="w-10 h-10 rounded-xl bg-[#0b0f19] border border-gray-800 text-slate-300 flex items-center justify-center hover:text-accentBlue hover:border-accentBlue transition-all">
-                                    <i class="fa-brands fa-github text-lg"></i>
-                                </a>
-                                <a href="mailto:robelyn@example.com" class="w-10 h-10 rounded-xl bg-[#0b0f19] border border-gray-800 text-slate-300 flex items-center justify-center hover:text-accentBlue hover:border-accentBlue transition-all">
-                                    <i class="fa-regular fa-envelope text-lg"></i>
-                                </a>
-                            </div>
-
-                            <button type="submit" class="glow-btn w-full sm:w-auto bg-accentBlue hover:bg-accentGlow text-slate-950 font-extrabold px-8 py-3 rounded-xl transition-all text-xs flex items-center justify-center gap-2">
-                                <i class="fa-solid fa-paper-plane"></i> Send Message
-                            </button>
+                        <div class="form-group">
+                            <label for="contact-message">Your Message</label>
+                            <textarea id="contact-message" rows="3" placeholder="Type your message here..." required></textarea>
                         </div>
-
-                        <div id="contactStatus" class="hidden text-center text-xs font-semibold text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 py-3 rounded-xl mt-4">
-                            Message received! Thank you for getting in touch.
-                        </div>
+                        <button type="submit" class="btn btn-primary" style="justify-content: center; margin-top: 5px;">Send Message</button>
                     </form>
                 </div>
             </div>
+        </section>
 
-        </div>
-    </main>
+    </div>
 
-    <footer class="border-t border-[#1f2937] py-6 text-center text-xs text-slate-500">
-        <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-3">
-            <p>© Robelyn S. Aquino • Information Technology Student, NVSU</p>
-            <p class="text-slate-600">Built with HTML5, CSS3, Bootstrap 5 & Tailwind CSS</p>
-        </div>
+    <footer>
+        <p>Robelyn Aquino.</p>
     </footer>
 
+    <div class="modal-overlay" id="projectModal" onclick="closeModal(event)">
+        <div class="modal-card" onclick="event.stopPropagation()">
+            <button class="modal-close" onclick="closeModalDirect()"><i class="fa-solid fa-xmark"></i></button>
+            <h3 id="modalTitle" style="margin-bottom: 0.8rem; font-family: 'Space Grotesk', sans-serif;"></h3>
+            <p id="modalDesc" style="color: var(--text-secondary); font-size: 0.95rem; margin-bottom: 1.5rem; line-height: 1.6;"></p>
+            <button class="btn btn-primary" onclick="closeModalDirect()" style="width: 100%; justify-content: center;">Close Details</button>
+        </div>
+    </div>
+
     <script>
-        // Toggle Mobile Menu
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
-            menu.classList.toggle('flex');
+        function openModal(title, desc) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalDesc').innerText = desc;
+            document.getElementById('projectModal').style.display = 'flex';
         }
-
-        // Project filtering logic
-        function filterProjects(category) {
-            const items = document.querySelectorAll('.project-item');
-            const buttons = ['all', 'mobile', 'web'];
-
-            buttons.forEach(b => {
-                const btn = document.getElementById(`btn-${b}`);
-                if (b === category) {
-                    btn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold bg-accentBlue text-slate-950 transition-all';
-                } else {
-                    btn.className = 'px-3 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all';
-                }
-            });
-
-            items.forEach(item => {
-                if (category === 'all' || item.classList.contains(category)) {
-                    item.style.display = 'flex';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
+        function closeModalDirect() {
+            document.getElementById('projectModal').style.display = 'none';
         }
-
-        // Contact form submission logic
-        function handleContactSubmit(event) {
-            event.preventDefault();
-            const status = document.getElementById('contactStatus');
-            status.classList.remove('hidden');
-            document.getElementById('portfolioContactForm').reset();
-            
-            setTimeout(() => {
-                status.classList.add('hidden');
-            }, 5000);
+        function closeModal(event) {
+            if (event.target.id === 'projectModal') closeModalDirect();
+        }
+        function showCustomToast() {
+            openModal('Message Sent!', 'Thank you for reaching out! Your message has been sent successfully.');
         }
     </script>
 </body>
